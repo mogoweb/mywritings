@@ -34,13 +34,13 @@ Jupyter中编写Python代码，和在VS Code中编写普通的Python代码一样
 
 ![image](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/201911/images/vs_notebook_04.png)
 
-非常遗憾的是，还不支持Jupyter Notebook的调试。要调试Jupyter Notebook，需要首先将其导出为Python文件。导出为Python文件后，即可使用VS Code调试器单步执行代码、设置断点、检查状态并分析问题。关于VS Code调试Python代码，以后有机会再写。
+非常遗憾的是，VS Code还不支持Jupyter Notebook的调试。要调试Jupyter Notebook，需要首先将其导出为Python文件。导出为Python文件后，即可使用VS Code调试器单步执行代码、设置断点、检查状态并分析问题。关于VS Code调试Python代码，以后有机会再写。
 
 #### 通过插件提升Jupyter Notebook体验
 
-写到这儿，似乎在VS Code中编写与在Web环境下编写Jupyter Notebook没什么差别。别慌，VS Code的强大就在于其插件。下面介绍一个智能代码补齐插件：IntelliCode。
+写到这儿，似乎在VS Code中和在Web环境下编写Jupyter Notebook没什么差别。别慌，VS Code的强大就在于其插件。下面介绍一个智能代码补齐插件：IntelliCode。
 
-在插件库中搜索**IntelliCode**，请认准微软出品。安装插件之后，在编写代码时，IntelliSense会在代码单元内为您提供智能代码完整建议，这里提供的建议是AI基于当前代码上下文提供的自动完成建议，和以前的IntelliSense还不太一样，并不仅仅是包名或者函数名或参数这样的建议。当然，现在的AI还不是特别靠谱，有时提供的一些建议有些智障，期待后续会持续增强吧。
+在插件库中搜索**IntelliCode**，请认准微软出品。安装插件之后，在编写代码时，IntelliSense会在代码单元内为您提供智能代码补齐建议，这里提供的建议是AI基于当前代码上下文提供的自动完成建议，和以前的IntelliSense还不太一样，并不仅仅是包名或者函数名或参数这样的建议。当然，现在的AI还不是特别靠谱，有时提供的一些建议有些智障，期待后续会持续增强吧。
 
 ![image](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/201911/images/vs_notebook_05.gif)
 
@@ -48,6 +48,6 @@ Jupyter中编写Python代码，和在VS Code中编写普通的Python代码一样
 
 ![image](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/201911/images/vs_notebook_06.gif)
 
-VS Code包含这一个巨大的宝库：插件，里面有各种各样的宝贝，等着我们去发现。等我又更多的心得，再和大家分享。
+VS Code包含着一个巨大的宝库：插件，里面有各种各样的宝贝，等着我们去发现。等我有更多的心得，再和大家分享。
 
 ![images](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/common_images/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7_%E5%85%B3%E6%B3%A8%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
