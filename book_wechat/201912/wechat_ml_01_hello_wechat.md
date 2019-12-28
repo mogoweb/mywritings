@@ -130,5 +130,9 @@
 
 本章主要讲解了建立一个支持tfjs的微信小程序工程，包括申请微信小程序，配置微信小程序工程，以及添加一段简单的tjfs代码。在下一篇文章中，我将以一个线性回归的例子，说明微信小程序中的tfjs。如果你有什么建议，欢迎留言。
 
+本系列文章的源码请访问：
+
+https://github.com/mogotech/wechat-tfjs-examples
+
 ![images](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/common_images/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7_%E5%85%B3%E6%B3%A8%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
 
