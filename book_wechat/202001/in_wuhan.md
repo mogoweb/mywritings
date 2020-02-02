@@ -38,16 +38,16 @@
 
 大部分时间陪家人看电影、看电视。中央电视台推出的经典咏流传、中国诗词大会第五季，都还不错，适合全家人一起观看。
 
-![经典咏流传](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/in_wuhan_07.jpg)
+![经典咏流传](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/in_wuhan_08.jpg)
 
-![中国诗词大会第五季](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/in_wuhan_08.jpg)
+![中国诗词大会第五季](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/in_wuhan_07.jpg)
 
-在这段特殊的日子理，心境特别重要。虽然自古文人都向往陶渊明那样的隐居生活，但真正到了与世隔绝的时候，又有多少人耐得住这样的寂寞呢？现在有了网络，可以打发难过的时光，但网上真真假假的消息，让人看了容易心情抑郁。放下手机，少刷微博、微信，多看看书，或看看电影，都挺好。
+在这段特殊的日子里，心境特别重要。虽然自古文人都向往陶渊明那样的隐居生活，但真正到了与世隔绝的时候，又有多少人耐得住这样的寂寞呢？现在有了网络，可以打发难过的时光，但网上真真假假的消息，让人看了容易心情抑郁。放下手机，少刷微博、微信，多看看书，或看看电影，都挺好。
 
 有一点非常遗憾，我去年配置的一台深度学习主机，放在办公室，断电断网，无法连上，暂时进行不了深度学习方面的研究。按照目前的趋势，比国家规定的时间，更长时间延迟上班是必然的，这也意味着在近期内我无法更新深度学习方面的文章。
 
-看着周围的朋友，还战斗在一线，特别是医务人员、解放军战士，特别感谢他们！正是因为有了他们的付出，我们才能安心的宅在家里，享受着岁月静好。
+看着周围的朋友，还战斗在一线，特别是医务人员、解放军战士、人民警察，特别感谢他们！正是因为有了他们的付出，我们才能安心的宅在家里，享受着岁月静好。这个时候，对于我们普通人来说，保护好自己，不给他们添麻烦，就是最大的贡献。
 
 昨天开始，武汉终于放晴，一扫连日来的阴霾，人也感觉畅快了不少。希望这次疫情很快过去，同时也祝各位朋友身体健康！
 
-![images](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/common_images/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7_%E5%85%B3%E6%B3%A8%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/common_images/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7_%E5%85%B3%E6%B3%A8%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
