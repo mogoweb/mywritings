@@ -4,7 +4,7 @@
 
 ![昔日繁华的关山大道，车辆稀少](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/movie_free_solo_01.jpg)
 
-街上的人很少，最多的是外卖小哥（很疑惑，这个时候还有人点外卖？），还有一些就是和我一样出门买菜的市民。大家都行色匆匆，全副武装。街面的商铺几乎都关门，除了几家药店和水果店。药店的工作人员穿着厚厚的防护服，让人依稀感觉进入了生活危机中的场景。
+街上的人很少，最多的是外卖小哥（很疑惑，这个时候还有人点外卖？），还有一些就是和我一样出门买菜的市民。大家都行色匆匆，全副武装。街面的商铺几乎都关门，除了几家药店和水果店。药店的工作人员穿着厚厚的防护服，让人依稀感觉进入了生化危机中的场景。
 
 ![外卖小哥依然在坚守岗位](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/movie_free_solo_02.jpg)
 
