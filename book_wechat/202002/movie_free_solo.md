@@ -2,19 +2,19 @@
 
 今天是武汉封城的第十二天，家里的存粮终于吃完，虽然疫情形势依然严峻，也不得不出门采购。做好防护措施后出门，昔日车水马龙的关山大道，空荡荡的，偶尔驶过一辆车，表明这个城市还在运转，并不是一座死城。
 
-![昔日繁华的关山大道，车辆稀少](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/movie_free_solo_01.jpg)
+![昔日繁华的关山大道，车辆稀少](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202002/images/movie_free_solo_01.jpg)
 
 街上的人很少，最多的是外卖小哥（很疑惑，这个时候还有人点外卖？），还有一些就是和我一样出门买菜的市民。大家都行色匆匆，全副武装。街面的商铺几乎都关门，除了几家药店和水果店。药店的工作人员穿着厚厚的防护服，让人依稀感觉进入了生化危机中的场景。
 
-![外卖小哥依然在坚守岗位](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/movie_free_solo_02.jpg)
+![外卖小哥依然在坚守岗位](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202002/images/movie_free_solo_02.jpg)
 
-![全副武装的药店店员](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/movie_free_solo_03.jpg)
+![全副武装的药店店员](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202002/images/movie_free_solo_03.jpg)
 
 超市的物资还比较丰富，特别是蔬菜和水果，供应充足，大家都在默默的井然有序的采购。
 
-![蔬菜供应充足](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/movie_free_solo_04.jpg)
+![蔬菜供应充足](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202002/images/movie_free_solo_04.jpg)
 
-![水果品种也多](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/movie_free_solo_04.jpg)
+![水果品种也多](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202002/images/movie_free_solo_04.jpg)
 
 一场疫情改变了整个城市，上次碰到这么严重的疫情，还是2003年非典时期。那一年我在学校里，感受没这么明显，记得那时我们关在学校里，不让出校园。但在校园里活动自由，也不用戴口罩。这次的新型冠状病毒，再一次引起人们的恐慌。
 
@@ -22,7 +22,7 @@
 
 徒手攀岩在英文中称作free solo，指的是不带任何绳索、护具进行攀岩。为什么会谈到徒手攀岩呢？因为我在春节期间观看了一部影片：**徒手攀岩**，觉得其中主人公如何面对恐惧和压力，对我们普通人也有借鉴意义。
 
-![徒手攀岩剧照](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/movie_free_solo_06.jpg)
+![徒手攀岩剧照](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202002/images/movie_free_solo_06.jpg)
 
 这是一部记录片，去年在中国院线上映，但票房惨淡。我想其中一个主要的原因就是和中国主流的价值观不符。很多人会发出直击灵魂的三连问：
 
@@ -36,7 +36,7 @@
 
 如何克服恐惧，影片中并没有像中国电影惯用的手法，诸如之前的电影《攀登者》，贯之以宏大的爱国主题，而是通过一些小细节，比如日复一日让人感觉到乏味的准备工作，极度的自律。影片中的埃里克斯，坚持素食，锻炼身体。虽然长期住在拖车里，他在房车上安装了一个引体向上装置，每天锻炼手指力量，仅凭手指就能完成引体向上。
 
-![指力引体向上](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202001/images/movie_free_solo_07.jpg)
+![指力引体向上](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202002/images/movie_free_solo_07.jpg)
 
 通过影片可以让我们了解到，虽然最终的攀登只需要4小时，但是在正式攀登之前，前期的准备工作量及其巨大。埃里克斯一次次带着保险绳和装备，实地验证攀登路线。并且在岩壁上尝试不同的攀登方式，测试它们是否有效可靠。下山之后，把每一次的结果记录下来，形成笔记。在笔记里，一点点总结出不同路段上需要注意的技术要点。在极为困难的路段上，他需要反复尝试，一直到最后找到他认为最可靠可信的攀爬方式。
 
