@@ -121,5 +121,105 @@ SSL-Session:
 
 经过测试，只有 "ECDHE-SM2-WITH-SMS4-SM3" 协商成功。
 
+使用NSS指令列出支持的密码套件：
 
+```
+listsuites | grep "Enabled"
+```
+输出为：
 
+```
+  0x1301 TLS 1.3 TLS 1.3 AES-GCM  128 AEAD   Enabled  FIPS Domestic            
+  0x1303 TLS 1.3 TLS 1.3 CHACHA20POLY1305 256 AEAD   Enabled       Domestic            
+  0x1302 TLS 1.3 TLS 1.3 AES-GCM  256 AEAD   Enabled       Domestic            
+  0xc02b ECDHE ECDSA AES-GCM  128 AEAD   Enabled  FIPS Domestic            
+  0xc02f ECDHE RSA   AES-GCM  128 AEAD   Enabled  FIPS Domestic            
+  0xcca9 ECDHE ECDSA CHACHA20POLY1305 256 AEAD   Enabled       Domestic            
+  0xcca8 ECDHE RSA   CHACHA20POLY1305 256 AEAD   Enabled       Domestic            
+  0xc00a ECDHE ECDSA AES      256 SHA1   Enabled  FIPS Domestic            
+  0xc009 ECDHE ECDSA AES      128 SHA1   Enabled  FIPS Domestic            
+  0xc013 ECDHE RSA   AES      128 SHA1   Enabled  FIPS Domestic            
+  0xc023 ECDHE ECDSA AES      128 SHA256 Enabled  FIPS Domestic            
+  0xc027 ECDHE RSA   AES      128 SHA256 Enabled  FIPS Domestic            
+  0xc014 ECDHE RSA   AES      256 SHA1   Enabled  FIPS Domestic            
+  0x009e DHE   RSA   AES-GCM  128 AEAD   Enabled  FIPS Domestic            
+  0xccaa DHE   RSA   CHACHA20POLY1305 256 AEAD   Enabled       Domestic            
+  0x0033 DHE   RSA   AES      128 SHA1   Enabled  FIPS Domestic            
+  0x0032 DHE   DSA   AES      128 SHA1   Enabled  FIPS Domestic            
+  0x0067 DHE   RSA   AES      128 SHA256 Enabled  FIPS Domestic            
+  0x0039 DHE   RSA   AES      256 SHA1   Enabled  FIPS Domestic            
+  0x0038 DHE   DSA   AES      256 SHA1   Enabled  FIPS Domestic            
+  0x006b DHE   RSA   AES      256 SHA256 Enabled  FIPS Domestic            
+  0x0016 DHE   RSA   3DES     112 SHA1   Enabled  FIPS Domestic            
+  0x0013 DHE   DSA   3DES     112 SHA1   Enabled  FIPS Domestic            
+  0x009c RSA   RSA   AES-GCM  128 AEAD   Enabled  FIPS Domestic            
+  0x002f RSA   RSA   AES      128 SHA1   Enabled  FIPS Domestic            
+  0x003c RSA   RSA   AES      128 SHA256 Enabled  FIPS Domestic            
+  0x0035 RSA   RSA   AES      256 SHA1   Enabled  FIPS Domestic            
+  0x003d RSA   RSA   AES      256 SHA256 Enabled  FIPS Domestic            
+  0x000a RSA   RSA   3DES     112 SHA1   Enabled  FIPS Domestic            
+  0x0005 RSA   RSA   RC4      128 SHA1   Enabled       Domestic            
+  0x0004 RSA   RSA   RC4      128 MD5    Enabled       Domestic
+```
+
+第一步： 实现 ECDHE-SM2-WITH-SMS4-SM3 密码套件
+
+0xE1,0x02  -  ECDHE-SM2-WITH-SMS4-SM3        TLSv1.2    Kx=ECDH      Au=SM2    Enc=SMS4(128)               Mac=SM3
+
+在NSS中，系统所支持的密码套件定义在 sslenum.c 文件中的 SSL_ImplementedCiphers[]数组中，这里面值是密码套件的编号。
+
+密码套件具体的定义列表位于 ssl3conf.c 文件的 cipher_suite_defs[] 数组中，其数据结构 为 ssl3CipherSuiteDef, 字段有加密算法、MAC算法、密钥交换算法、哈希算法。
+
+系统实现了的密码套件配置列表定义在 ssl3con.c 文件的 cipherSuites[ssl_V3_SUITES_IMPLEMENTED] 数组中， 其数据结构为 ssl3CipherSuiteCfg, 字段有策略、是否启用等。
+
+具体的密码套件信息列表定义在 sslinfo.c 文件的 suiteInfo[] 数组中，其数据结构为 SSLCipherSuiteInfo，包含了很多信息：
+
+```c++
+typedef struct SSLCipherSuiteInfoStr {
+    /* On return, SSL_GetCipherSuitelInfo sets |length| to the smaller of
+     * the |len| argument and the length of the struct used by NSS.
+     * Callers must ensure the application uses a version of NSS that
+     * isn't older than the version used at compile time. */
+    PRUint16 length;
+    PRUint16 cipherSuite;
+
+    /* Cipher Suite Name */
+    const char* cipherSuiteName;
+
+    /* server authentication info */
+    const char* authAlgorithmName;
+    SSLAuthType authAlgorithm; /* deprecated, use |authType| */
+
+    /* key exchange algorithm info */
+    const char* keaTypeName;
+    SSLKEAType keaType;
+
+    /* symmetric encryption info */
+    const char* symCipherName;
+    SSLCipherAlgorithm symCipher;
+    PRUint16 symKeyBits;
+    PRUint16 symKeySpace;
+    PRUint16 effectiveKeyBits;
+
+    /* MAC info */
+    /* AEAD ciphers don't have a MAC. For an AEAD cipher, macAlgorithmName
+     * is "AEAD", macAlgorithm is ssl_mac_aead, and macBits is the length in
+     * bits of the authentication tag. */
+    const char* macAlgorithmName;
+    SSLMACAlgorithm macAlgorithm;
+    PRUint16 macBits;
+
+    PRUintn isFIPS : 1;
+    PRUintn isExportable : 1; /* deprecated, don't use */
+    PRUintn nonStandard : 1;
+    PRUintn reservedBits : 29;
+
+    /* The following fields were added in NSS 3.24. */
+    /* This reports the correct authentication type for the cipher suite, use
+     * this instead of |authAlgorithm|. */
+    SSLAuthType authType;
+
+    /* When adding new fields to this structure, please document the
+     * NSS version in which they were added. */
+} SSLCipherSuiteInfo;
+```
