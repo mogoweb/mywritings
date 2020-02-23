@@ -223,3 +223,27 @@ typedef struct SSLCipherSuiteInfoStr {
      * NSS version in which they were added. */
 } SSLCipherSuiteInfo;
 ```
+
+在 secoidt.h 文件中添加一个 SECOidTag 枚举值后，需要在 secoid.c 文件中的 oids 数组加入一条数据，通常用 OD 宏定义。
+
+TLS 测试客户端, 使用 TLS_ECDHE_SM2_WITH_SMS4_SM3 测试套件连接国密测试网站:
+
+```
+tstclnt -h sm2test.ovssl.cn -p 443 -D -o -v -c a
+```
+
+提示：
+
+```
+tstclnt: read from socket failed: SSL_ERROR_NO_CYPHER_OVERLAP: Cannot communicate securely with peer: no common encryption algorithm(s).
+```
+
+密码套件协商不成功。使用wireshark分析网络包，握手协议 客户端发送的信息如下：
+
+![NSS发送的Client Hello](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_work/gmbrowser/images/tls_02.png)
+
+而使用 GMSSL ，客户端发送的信息如下：
+
+![NSS发送的Client Hello](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_work/gmbrowser/images/tls_02.png)
+
+是因为extension不同的缘故？
