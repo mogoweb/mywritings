@@ -41,6 +41,67 @@ openssl ciphers -V | column -t
 * 第六列：表示加密算法、加密模式、密钥长度。
 * 第七列：表示HMAC算法。其中AEAD表示采用的是AEAD加密模式（比如AES128-GCM），无须HMAC算法。
 
+而 GMSSL 代码中定义的密码套件如下(t1_trce.c):
+
+```c++
+    /* GM/T [SM2DHE|SM2|SM9DHE|SM9|RSA]-WITH-[SM1|SMS4]-[SM3|SHA1] */
+    {0xE001, "GMTLS_SM2DHE_WITH_SM1_SM3"},
+    {0xE003, "GMTLS_SM2_WITH_SM1_SM3"},
+    {0xE005, "GMTLS_SM9DHE_WITH_SM1_SM3"},
+    {0xE007, "GMTLS_SM9_WITH_SM1_SM3"},
+    {0xE009, "GMTLS_RSA_WITH_SM1_SM3"},
+    {0xE00A, "GMTLS_RSA_WITH_SM1_SHA1"},
+    {0xE011, "GMTLS_SM2DHE_WITH_SMS4_SM3"},
+    {0xE013, "GMTLS_SM2_WITH_SMS4_SM3"},
+    {0xE015, "GMTLS_SM9DHE_WITH_SMS4_SM3"},
+    {0xE017, "GMTLS_SM9_WITH_SMS4_SM3"},
+    {0xE019, "GMTLS_RSA_WITH_SMS4_SM3"},
+    {0xE01A, "GMTLS_RSA_WITH_SMS4_SHA1"},
+
+    {0xE101, "GMTLS_ECDHE_SM2_WITH_SM1_SM3"},
+    {0xE102, "GMTLS_ECDHE_SM2_WITH_SMS4_SM3"},
+    {0xE103, "GMTLS_ECDHE_SM2_WITH_SSF33_SM3"},
+    {0xE105, "GMTLS_ECDHE_SM2_WITH_SMS4_SHA256"},
+    {0xE107, "GMTLS_ECDHE_SM2_WITH_SMS4_GCM_SM3"},
+    {0xE108, "GMTLS_ECDHE_SM2_WITH_SMS4_CCM_SM3"},
+
+    {0xE10D, "GMTLS_ECDHE_SM2_WITH_ZUC_SM3"},
+    {0xE10E, "GMTLS_ECDHE_SM2_WITH_ZUC256_SM3"},
+    {0xE201, "GMTLS_SM2DHE_SM2_WITH_SM1_SM3"},
+    {0xE202, "GMTLS_SM2DHE_SM2_WITH_SMS4_SM3"},
+    {0xE203, "GMTLS_SM2DHE_SM2_WITH_SSF33_SM3"},
+    {0xE204, "GMTLS_SM2DHE_SM2_WITH_ZUC_SM3"},
+    {0xE205, "GMTLS_SM2DHE_SM2_WITH_SMS4_GCM_SM3"},
+    {0xE206, "GMTLS_SM2DHE_SM2_WITH_SMS4_CCM_SM3"},
+    {0xE209, "GMTLS_SM2DHE_SM2_WITH_ZUC256_SM3"},
+    {0xF101, "GMTLS_PSK_WITH_SMS4_CBC_SM3"},
+    {0xF102, "GMTLS_PSK_WITH_SMS4_GCM_SM3"},
+    {0xF103, "GMTLS_PSK_WITH_SMS4_CCM_SM3"},
+    {0xF10B, "GMTLS_SM2DHE_PSK_WITH_SMS4_CBC_SM3"},
+    {0xF10C, "GMTLS_SM2DHE_PSK_WITH_SMS4_GCM_SM3"},
+    {0xF10D, "GMTLS_SM2DHE_PSK_WITH_SMS4_CCM_SM3"},
+    {0xF10E, "GMTLS_PSK_WITH_SM1_CBC_SM3"},
+    {0xF117, "GMTLS_PSK_WITH_SSF33_CBC_SM3"},
+    {0xF120, "GMTLS_ECDHE_PSK_WITH_SMS4_CBC_SM3"},
+    {0xF121, "GMTLS_ECDHE_PSK_WITH_SMS4_GCM_SM3"},
+    {0xF122, "GMTLS_ECDHE_PSK_WITH_SMS4_CCM_SM3"},
+    {0xF123, "GMTLS_PSK_WITH_ZUC_SM3"},
+    {0xF124, "GMTLS_PSK_WITH_ZUC256_SM3"},
+    {0xF125, "GMTLS_ECDHE_PSK_WITH_ZUC_SM3"},
+    {0xF126, "GMTLS_ECDHE_PSK_WITH_ZUC256_SM3"},
+    {0xF127, "GMTLS_SM2DHE_PSK_WITH_ZUC_SM3"},
+    {0xF128, "GMTLS_SM2DHE_PSK_WITH_ZUC256_SM3"},
+    {0xF201, "GMTLS_SRP_SM3_WITH_SMS4_CBC_SM3"},
+    {0xF202, "GMTLS_SRP_SM3_WITH_SMS4_GCM_SM3"},
+    {0xF203, "GMTLS_SRP_SM3_WITH_SMS4_CCM_SM3"},
+    {0xFEFE, "SSL_RSA_FIPS_WITH_DES_CBC_SHA"},
+    {0xFEFF, "SSL_RSA_FIPS_WITH_3DES_EDE_CBC_SHA"},
+
+#ifndef OPENSSL_NO_GMTLS
+    {0xF10E, "GMTLS_ECDHE_PSK_WITH_SMS4_CBC_SM3"},
+#endif
+```
+
 测试服务器是否支持某个特定的密码套件:
 
 ```bash
@@ -226,7 +287,7 @@ typedef struct SSLCipherSuiteInfoStr {
 
 在 secoidt.h 文件中添加一个 SECOidTag 枚举值后，需要在 secoid.c 文件中的 oids 数组加入一条数据，通常用 OD 宏定义。
 
-TLS 测试客户端, 使用 TLS_ECDHE_SM2_WITH_SMS4_SM3 测试套件连接国密测试网站:
+TLS 测试客户端, 使用 TLS_ECDHE_SM2_WITH_SMS4_SM3 密码套件连接国密测试网站:
 
 ```
 tstclnt -h sm2test.ovssl.cn -p 443 -D -o -v -c a
@@ -244,6 +305,35 @@ tstclnt: read from socket failed: SSL_ERROR_NO_CYPHER_OVERLAP: Cannot communicat
 
 而使用 GMSSL ，客户端发送的信息如下：
 
-![NSS发送的Client Hello](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_work/gmbrowser/images/tls_02.png)
+![GMSSL发送的Client Hello](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_work/gmbrowser/images/tls_03.png)
 
-是因为extension不同的缘故？
+NSS更换密码套件 TLS_RSA_WITH_AES_256_CBC_SHA 协商成功：
+
+![NSS发送的Client Hello，协商成功](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_work/gmbrowser/images/tls_04.png)
+
+其原因可能在于 TLS_ECDHE_SM2_WITH_SMS4_SM3 密码套件未发送所需的 extension 数据。
+
+```
+{TLSEXT_TYPE_ec_point_formats, "ec_point_formats"},
+```
+
+在GMSSL中定义了 ssl_print_extension 方法，输出扩展信息。
+
+
+=================== 2020.2.24 补充 =================
+
+要在Client Hello 数据报文中附加 ec_point_formats 扩展，首先需要在 ssl3ecc.c 文件的 ssl_all_ec_suites 数组中添加 TLS_ECDHE_SM2_WITH_SMS4_SM3 项。
+
+发送 ec_point_formats 扩展的函数为： ssl3_SendSupportedPointFormatsXtn。
+
+其中 ec_point_formats 参数定义为：
+```c++
+     static const PRUint8 ecPtFmt[6] = {
+        0, 11, /* Extension type */
+        0, 2,  /* octets that follow */
+        1,     /* octets that follow */
+        0      /* uncompressed type only */
+    };
+```
+
+这个和GMSSL 发送的 ec_point_formats 参数不同：
