@@ -102,6 +102,8 @@ openssl ciphers -V | column -t
 #endif
 ```
 
+所有SSL的密码套件定义在 ssl3_ciphers[] 数组中。
+
 测试服务器是否支持某个特定的密码套件:
 
 ```bash
@@ -328,7 +330,7 @@ NSS更换密码套件 TLS_RSA_WITH_AES_256_CBC_SHA 协商成功：
 
 其中 ec_point_formats 参数定义为：
 ```c++
-     static const PRUint8 ecPtFmt[6] = {
+    static const PRUint8 ecPtFmt[6] = {
         0, 11, /* Extension type */
         0, 2,  /* octets that follow */
         1,     /* octets that follow */
@@ -336,4 +338,86 @@ NSS更换密码套件 TLS_RSA_WITH_AES_256_CBC_SHA 协商成功：
     };
 ```
 
-这个和GMSSL 发送的 ec_point_formats 参数不同：
+这个和GMSSL 发送的 ec_point_formats 参数不同, 修改为：
+
+```c++
+    static const PRUint8 ecPtFmt[8] = {
+        0, 11, /* Extension type */
+        0, 4,  /* octets that follow */
+        3,     /* octets that follow */
+        0,     /* uncompressed */
+        1,     /* ansiX962_compressed_prime */
+        2      /* ansiX962_compressed_char2 */
+    };
+```
+
+=================== 2020.2.25 补充 ===================
+
+SSLSignatureScheme 是一个枚举类型，定义在 sslt.h 文件中，它定义了 SSL 通信中的签名方案，注意签名方案并不仅仅是一个签名算法。
+
+=================== 2020.2.26 补充 ===================
+
+国标 GM/T 0024-2014中定义的密码套件：
+
+```
+ECDHE_SM1_SM3           0xe0, 0x01
+ECC_SM1_SM3             0xe0, 0x03
+IBSDH_SM1_SM3           0xe0, 0x05
+IBC_SM1_SM3             0xe0, 0x07
+RSA_SM1_SM3             0xe0, 0x09
+RSA_SM1_SHA1            0xe0, 0x0a
+ECDHE_SM4_SM3           0xe0, 0x11
+ECC_SM4_SM3             0xe0, 0x13
+IBSDH_SM4_SM3           0xe0, 0x15
+IBC_SM4_SM3             0xe0, 0x17
+RSA_SM4_SM3             0xe0, 0x19
+RSA_SM4_SHA1            0xe0, 0x1a
+```
+
+实现ECC和ECDHE的算法为SM2，实现IBC和IBSDH的算法为SM9
+
+看了一下 https://github.com/guanzhi/GmSSL/issues/227，GMSSL的实现可能并没有遵照国家国密标准实现。
+
+继续采用 0xE1,0x02  -  ECDHE-SM2-WITH-SMS4-SM3 调试整个流程。
+
+卡在密钥交换上：
+
+![certificate](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_work/gmbrowser/images/tls_05.png)
+
+想要显示SSL通讯过程中的数据dump，可以设置一个环境变量：
+
+```bash
+export SSLTRACE=50
+```
+
+后面的值设得越大，显示出的TRACE信息越多，大于30就可以显示所有TRACE信息了。
+
+注意在GMSSL中 密码套件的常量定义为 ：
+
+GMTLS_CK_ECDHE_SM2_WITH_SMS4_SM3
+
+在 sslimpl.h 文件中 有密钥交换算法结构的定义：
+```c++
+typedef struct {
+    /* An identifier for this struct. */
+    SSL3KeyExchangeAlgorithm kea;
+    /* The type of key exchange used by the cipher suite. */
+    SSLKEAType exchKeyType;
+    /* If the cipher suite uses a signature, the type of key used in the
+     * signature. */
+    KeyType signKeyType;
+    /* In most cases, cipher suites depend on their signature type for
+     * authentication, ECDH certificates being the exception. */
+    SSLAuthType authKeyType;
+    /* True if the key exchange for the suite is ephemeral.  Or to be more
+     * precise: true if the ServerKeyExchange message is always required. */
+    PRBool ephemeral;
+    /* An OID describing the key exchange */
+    SECOidTag oid;
+} ssl3KEADef;
+```
+
+我们在 cipher_suite_defs 数组中定义了 GMTLS_ECDHE_SM2_WITH_SMS4_SM3 所使用的密钥交换算法为 kea_ecdh_ecdsa 
+
+
+
