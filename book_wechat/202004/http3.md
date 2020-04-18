@@ -30,7 +30,7 @@ HTTP协议大家应该不陌生，通过浏览器访问网页，就使用到了H
 
 实际上，QUIC的连接建立策略是基于加密和传输握手的结合。
 
-[QUIC和TLS集成](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202004/images/http_01.png)
+![QUIC和TLS集成](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202004/images/http_01.png)
 
 使用QUIC，默认情况下将对所有内容进行加密。
 
