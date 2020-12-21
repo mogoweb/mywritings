@@ -419,5 +419,49 @@ typedef struct {
 
 我们在 cipher_suite_defs 数组中定义了 GMTLS_ECDHE_SM2_WITH_SMS4_SM3 所使用的密钥交换算法为 kea_ecdh_ecdsa 
 
+### gdb 调试 tlsclnt 的方法
 
+```
+$ gdb tstclnt
+(gdb) set args -h 127.0.0.1 -p 6001 -D -o -v -c a -u -G
+(gdb) b sechash.c:308
+No source file named sechash.c.
+Make breakpoint pending on future shared library load? (y or [n]) y
+Breakpoint 1 (sechash.c:308) pending.
+(gdb) r
+Starting program: /home/alex/work/gmbrowser/workspace/dist/Debug/bin/tstclnt -h 127.0.0.1 -p 6001 -D -o -v -c a -u -G
+[Thread debugging using libthread_db enabled]
+Using host libthread_db library "/lib/x86_64-linux-gnu/libthread_db.so.1".
+Breakpoint 1, HASH_GetHashObjectByOidTag (hashOid=SEC_OID_SHA1) at ../../lib/cryptohi/sechash.c:310
+310	    printf("HASH_GetHashObjectByOidTag\n");
+(gdb) bt
+#0  HASH_GetHashObjectByOidTag (hashOid=SEC_OID_SHA1) at ../../lib/cryptohi/sechash.c:310
+#1  0x00007ffff79449b5 in HASH_ResultLenByOidTag (hashOid=SEC_OID_SHA1) at ../../lib/cryptohi/sechash.c:320
+#2  0x00007ffff7956761 in PK11_HashBuf (hashAlg=SEC_OID_SHA1, out=0x6514d0 "", in=0x650dd8 "0Y0\023\006\a*\206H\316=\002\001\006\b*\201\034\317U\001\202-\003B", len=91)
+    at ../../lib/pk11wrap/pk11cxt.c:625
+#3  0x00007ffff7988d78 in cert_GetKeyID (cert=0x650960) at ../../lib/certdb/certdb.c:616
+#4  0x00007ffff79891b7 in CERT_DecodeDERCertificate (derSignedCert=0x7fffffffc080, copyDER=1, nickname=0x0) at ../../lib/certdb/certdb.c:769
+#5  0x00007ffff799c216 in nssDecodedPKIXCertificate_Create (arenaOpt=0x0, encoding=0x6500b8) at ../../lib/pki/pki3hack.c:489
+#6  0x00007ffff799ce75 in stan_GetCERTCertificate (c=0x650058, forceUpdate=0) at ../../lib/pki/pki3hack.c:861
+#7  0x00007ffff799d0a8 in STAN_GetCERTCertificate (c=0x650058) at ../../lib/pki/pki3hack.c:922
+#8  0x00007ffff7997823 in CERT_NewTempCertificate (handle=0x62c2e0, derCert=0x7fffffffc200, nickname=0x0, isperm=0, copyDER=1) at ../../lib/certdb/stanpcertdb.c:391
+#9  0x00007ffff72608cc in ssl3_CompleteHandleCertificate (ss=0x6325c0, b=0x63879d "", length=1157) at ../../lib/ssl/ssl3con.c:10759
+#10 0x00007ffff72606c2 in ssl3_HandleCertificate (ss=0x6325c0, b=0x638544 "", length=1758) at ../../lib/ssl/ssl3con.c:10681
+```
 
+(gdb) bt
+#0  ssl_MapLowLevelError (hiLevelError=-12207) at ../../lib/ssl/sslerr.c:22
+#1  0x00007ffff724fec2 in ssl3_ComputeMasterSecretFinish (ss=0x632270, master_derive=3461563242, key_derive=993, pms_version=0x0, params=0x7fffffffc320, keyFlags=10240, pms=0x65ae20, msp=0x7fffffffc408)
+    at ../../lib/ssl/ssl3con.c:3668
+#2  0x00007ffff72503d7 in tls_ComputeExtendedMasterSecretInt (ss=0x632270, pms=0x65ae20, msp=0x7fffffffc408) at ../../lib/ssl/ssl3con.c:3836
+#3  0x00007ffff72504c1 in ssl3_ComputeMasterSecret (ss=0x632270, pms=0x65ae20, msp=0x7fffffffc408) at ../../lib/ssl/ssl3con.c:3854
+#4  0x00007ffff72505df in ssl3_DeriveMasterSecret (ss=0x632270, pms=0x65ae20) at ../../lib/ssl/ssl3con.c:3881
+#5  0x00007ffff724cf82 in ssl3_InitPendingCipherSpec (ss=0x632270, pms=0x65ae20) at ../../lib/ssl/ssl3con.c:2207
+#6  0x00007ffff7266389 in ssl3_SendECDHClientKeyExchange (ss=0x632270, svrPubKey=0x657900) at ../../lib/ssl/ssl3ecc.c:316
+#7  0x00007ffff7255ebc in ssl3_SendClientKeyExchange (ss=0x632270) at ../../lib/ssl/ssl3con.c:6366
+#8  0x00007ffff72590fe in ssl3_SendClientSecondRound (ss=0x632270) at ../../lib/ssl/ssl3con.c:7792
+#9  0x00007ffff7260081 in ssl3_AuthCertificateComplete (ss=0x632270, error=0) at ../../lib/ssl/ssl3con.c:11050
+#10 0x00007ffff72780b5 in SSL_AuthCertificateComplete (fd=0x632200, error=0) at ../../lib/ssl/sslsecur.c:1210
+#11 0x0000000000406d22 in restartHandshakeAfterServerCertIfNeeded (fd=0x632200, serverCertAuth=0x61c480 <serverCertAuth>, override=1) at ../../cmd/tstclnt/tstclnt.c:896
+#12 0x0000000000407efa in run_client () at ../../cmd/tstclnt/tstclnt.c:1308
+#13 0x0000000000409361 in main (argc=12, argv=0x7fffffffd7a8) at ../../cmd/tstclnt/tstclnt.c:1867
