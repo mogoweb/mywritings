@@ -27,11 +27,11 @@ Colab 是 Google 家的用来在线编写并运行 Python 程序的 notebook，�
 
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202206/images/ai_art_trial_01.png)
 
-这是一副未完成的作品。如果你觉得对你非常有用，可以购买谷歌的云计算资源。
+这是一幅未完成的作品。如果你觉得对你非常有用，可以购买谷歌的云计算资源，完成一幅完整的作品。
 
 不过对一名程序员来说，怎么会这么容易就为云计算买单呢？
 
-接着尝试其它的 AI 工具：CogView。这是中国之光清华的项目，据团队发布的论文里称“人工评估的测试中，CogView被选为最好的概率为37.02%，远远超过其他基于GAN的模型。” 
+接着尝试其它的 AI 工具：CogView。这是中国之光清华大学的项目，据团队发布的论文里称“人工评估的测试中，CogView被选为最好的概率为37.02%，远远超过其他基于GAN的模型。” 
 
 > 来源：CogView: Mastering Text-to-Image Generation via Transformers （https://arxiv.org/abs/2105.13290）
 
@@ -164,3 +164,12 @@ sudo chown alex:alex ~/disco-diffusion/images_out/
 
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202206/images/ai_art_trial_08.png)
 
+值得一提的是，AI 程序对同一个输入，每次输出并不相同，这和传统的计算机程序不一样，所以要获得好的结果，需要多多尝试，挑选出最好的结果。
+
+和菜头自从迷上了 AI 作画后，其公众号的题图都是自己生成，现在网上也有一些大神，通过 AI 画出了不少令人惊艳的作品。下面这篇文章尝试了古风插画，我非常喜欢：
+
+[AI 能理解和表达古诗意境吗？来看看西乔用人工智能辅助创作的古风插画（第一辑）](https://mp.weixin.qq.com/s/oMQ_HR1dJQXLhXv-9qwizA)
+
+你对 AI 作画怎么看，先动手尝试一下再来说说你的看法吧！
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/common_images/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7_%E5%85%B3%E6%B3%A8%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
