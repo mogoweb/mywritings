@@ -47,6 +47,39 @@ DD 包含很多参数，用来调整图像的生成过程，参数可以在 Disc
   
   每次迭代，AI 将图像分割成小块，并将每个小块与提示（prompts）进行比较，以决定如何指导下一个生成步骤。更多的小块通常可以产生更好的图像，因为 DD 在每个时间步有更多的机会微调图像精度。
  
-  当然，小块划分得越多，内存消耗越大。在默认设置下，DD 每个步骤执行的切割数量为 cutn_batches x 16。如果 cutn_batches 为 4，DD 将分为 4渲染每个图像需要大约 4 倍的时间。
+  小块划分得越多，内存消耗越大。
+  
+  在默认设置下，DD 每个步骤执行的切割数量为 cutn_batches x 16。如果 cutn_batches 为 4，DD 将分为 4 个连续批次，每批次切割 16 块，因为一次只评估 16 个小块，DD 只使用 16 个小块所需的内存，但提供 64 个小块的质量优势，但带来的不足之处是，渲染每个图像需要大约 4 倍的时间。
  
-  所以，增加 cutn_batches 会增加渲染时间，因为工作是按顺序完成的。 DD 的默认剪辑时间表是一个不错的起点，但剪辑时间表可以在 Cutn Scheduling 部分进行调整，如下所述。
+  所以，增加 cutn_batches 会增加渲染时间，因为工作是按顺序完成的。
+
+* skip_augs：(False)
+
+  DD 使用了一些视觉效果增强技巧，在图像创建过程中引入随机图像缩放、透视和其他调整方法，以提高图像质量。这样产生的图像更加自然、边缘更加平滑。通过将 skip_augs 设置为 True，可以跳过这些增强，这样可以稍微加快渲染速度。
+
+* display_rate: (50|5-500)
+
+  前面讲到，DD 是通过多次迭代生成最终图像，在运行期间，DD 提供一个机会让你监控正在创建的每个图像。 如果 display_rate 设置为 50，DD 将每 50 步显示一次图像。
+ 
+  将此值设置为较低的值，例如 5 或 10，可以仔细观察出图像是如何一步一步生成的。如果你对中间过程不敢兴趣，可以将 display_rate 设置为等于前面的 steps 参数值，这样可以稍稍提高在 Colab 中运行的速度，毕竟显示图像也会花费一点时间。
+
+
+随后，我尝试了几种参数组合对图像生成速度的影响（本地部署，显卡 RTX 2080 TI ）。
+
+第一次，我只修改了 n_batches 参数值，将其设为 1，耗时 07:18，得到如下图像：
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202206/images/ai_art_parameters_03.png)
+
+第二次，我修改的参数 n_batches=1 cutn_batches=1，结果耗时 04:55，得到如下图像：
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202206/images/ai_art_parameters_04.png)
+
+第三次，我修改的参数 n_batches=1 cutn_batches=1 skip_augs=True steps=150，耗时降低到 02:45，得到如下图像：
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202206/images/ai_art_parameters_05.png)
+
+通过这些尝试，发现适当降低画作的质量，时间就能显著降低。在家用级显卡上，不到三分钟就能渲染出一幅还算不错的作品，这也给了大众参与创作的机会。而且通过参数调整，我们也可以借助于 Colab 创作，无需购买谷歌的 GPU 运算资源。
+
+后续我会研究一下 提示语（prompts）对创作的影响，尝试创作一些古风山水画。
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/common_images/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7_%E5%85%B3%E6%B3%A8%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
