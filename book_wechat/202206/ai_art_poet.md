@@ -1,7 +1,5 @@
 # 根据中国古诗词作画，AI 可以做到吗？
 
-<<<<<<< HEAD
-=======
 AI 作画工具 DD （Disco Diffusion）面市后，不少大神做出了惊艳的作品。玩家以外国人居多，网上的资料也是英文资料较多。现在国内也有人尝试，比如和菜头在他的「槽边往事」微信公众号就写了好几篇关于 AI 作画的文章，现在他的公众号配图也使用自己生成的图。西乔在她的「神秘的程序员们」微信公众号也写了好几篇教程，值得一看。
 
 这段时间我也尝试了一些 AI 作画，但做出的画总是不太理想。作为一名程序员，其实我关注的并不是做出艺术性比较强的作品，而是想探索一些可能，也就是探索让 AI 做出一些比较新奇的东西出来。在「[AI 能理解和表达古诗意境吗？来看看西乔用人工智能辅助创作的古风插画（第一辑）](https://mp.weixin.qq.com/s/oMQ_HR1dJQXLhXv-9qwizA)」这篇文章中，作者做出了效果非常不错的古风插画，其插画也比较贴近诗词的意境，但作者并没有说明其作画的参数，使用了怎样的提示句子（prompts）。看到这些作品后，我就在思考，能否直接根据古诗词来作画呢？
@@ -75,4 +73,3 @@ The green leaves of the lotus, unbridled, extend to the distance between the wat
 综合试用下来，根据古诗词作画依然困难重重，需要更多的中国人参与其中。
 
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/common_images/%E5%BE%AE%E4%BF%A1%E5%85%AC%E4%BC%97%E5%8F%B7_%E5%85%B3%E6%B3%A8%E4%BA%8C%E7%BB%B4%E7%A0%81.png)
->>>>>>> 08a12943ba5dd174077e9d7809c213a6721b3e44
