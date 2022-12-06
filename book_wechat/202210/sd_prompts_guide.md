@@ -80,7 +80,62 @@ Prompt 的语法并不重要，只要带上 “chinese watercolor painting” �
 
 > A little boy is standing in front of a waterfall, mountain, chinese watercolor-wash
 
-输出：
-
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202210/images/sd_prompts_guide_07.png)
 
+添加**庙宇**元素：
+
+> a beautiful chinese watercolor painting of the mountainous landscape of huangshan with a buddisht temple on the hilltop on a rainy day
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202210/images/sd_prompts_guide_08.png)
+
+在生成一张还不错的作品后，接下来就需要生成一张高清作品。这是从生成效率和质量作的平衡，一般民用级显卡显存都不算大，如果生成超大尺寸的图片，不仅可能出现显存不足的问题，还会造成生成时间加长。AI 生成画作的质量并不十分稳定，可能需要生成多张才能挑出一幅满意的作品。目前在我的系统上，输出 512 x 512 大小的图像，大约需要 20 秒，这样一次生成 9 张图片也不到 3 分钟，还能接受。
+
+图片放大不能仅仅通过拉伸来实现，这样得到的图像虽然像素多，但照样不清晰，这个时候就需要借助 AI 技术来实现高清放大。
+
+#### 五、高清放大
+
+AI 高清放大的方法有多种，我本机部署的 Stable Diffusion 本身就集成了放大功能。下面是操作界面：
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202210/images/sd_prompts_guide_09.png)
+
+可以选择放大 2 倍和 4 倍，这里放大 2 倍是长和宽各放大 2 倍，清晰度还是不错的。
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202210/images/sd_prompts_guide_10.png)
+
+还有一种方法就是在生成画作的时候在 **Advanced Options** 部分指定放大倍数：
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202210/images/sd_prompts_guide_11.png)
+
+但是不太建议在这里指定，这相当于每幅作品都作一个放大操作，比较费时间，毕竟 AI 生成的画作并不是每幅都令人满意，针对满意作品进行高清放大，更加高效。
+
+#### 六、小结
+
+综合下来，使用 AI 作画是不是非常简单？当然要创作复杂的作品，那就需要在 Prompt 和调参上花费更多的心思。我对 Stable Diffusion 的各种参数研究不多，都是使用默认参数。Prompt 则可以搜索其他高手的作品，包括：
+
+https://lexica.art/
+
+https://www.krea.ai/
+
+https://openart.ai/
+
+下面展示一下我创作的国画：
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202210/images/sd_prompts_guide_12.png)
+
+> A little boy is standing in front of a waterfall, mountain, trees, chinese watercolor-wash
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202210/images/sd_prompts_guide_13.png)
+
+> Osmanthus fragrans, mid-shot, Chinese watercolor-wash, art by Xiagui
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202210/images/sd_prompts_guide_14.png)
+
+> bamboo in strong wind, style of Chinese ink painting, art by zhengbanqiao
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202210/images/sd_prompts_guide_15.png)
+
+> a river across Taishan mountains, sunrise, foggy, trees, chinese watercolor-wash
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/202210/images/sd_prompts_guide_16.png)
+
+> a beautiful chinese watercolor painting of the mountainous landscape of huangshan with a buddisht temple on the hilltop on a rainy day
