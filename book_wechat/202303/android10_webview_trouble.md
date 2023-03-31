@@ -1,4 +1,4 @@
-# Android 10 踩坑实录
+# Android 10 WebView 踩坑实录
 
 项目要求支持 8K 高清视频（H265编码）播放，拿到板子后却发现使用 App 可以播放 8K 高清视频，但使用浏览器却不行，即使安装上最新的 Chrome for Android 也不行。根据以往的浏览器内核开发经验，在 Android 平台上，Chromium WebView 最终是调用系统框架层的 MediaPlayer 进行播放。理论上只要系统框架层能够支持 8K 高清播放，那么浏览器应该也支持。实际情况却并非如此，而且 Android 10 预编译 WebView 没任何日志输出，所以需要下载源码编译 Chromium WebView，找出问题所在。
 
