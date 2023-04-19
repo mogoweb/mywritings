@@ -1,6 +1,6 @@
 # Stable Diffusion XL 带来哪些新东西？
 
-前几天写了一篇小短文《 Stable Diffusion 即将发布全新版本》，很快，Stability AI 的创始人兼首席执行官 Emad Mostaque 在一条推文中宣布，Stable Diffusion XL 测试现已可用于公开测试。那么这样一个全新版本会带来哪些新东西，让我们眼见为实吧。
+前几天写了一篇小短文《[ Stable Diffusion 即将发布全新版本](https://mp.weixin.qq.com/s/ZYjLNSa8klhlBOqMiPf-3w)》，很快，Stability AI 的创始人兼首席执行官 Emad Mostaque 在一条推文中宣布，Stable Diffusion XL 测试现已可用于公开测试。那么这样一个全新版本会带来哪些新东西，让我们眼见为实吧。
 
 不过在开始之前，简单说明一下：
 
@@ -65,4 +65,4 @@ Stream Studio 使用了一种信用分进行计费，大抵是：
 
 尽管 Stable Diffusion XL 与之前的 AI 模型相比似乎没有显着改进，但它仍然是向前迈进了一步，相信今后还有进一步改进的空间。
 
-我还是很期待新模型发布。
+我还是很期待新模型的发布。
