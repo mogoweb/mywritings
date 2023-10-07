@@ -15,7 +15,9 @@
    Webview Shell 的代码 位于 packages/apps/Browser2/ 目录下。
 
 2. AOSP 的预编译 Chromium Webview 位于 external/chromium-webview/ 目录下。该目录还有 arm, arm64, x86, x86_64 几个子目录，这是由于浏览器内核引擎主要使用 C++ 开发，所以针对不同的 CPU 架构有着不同的 apk。如果你的系统是针对特定的平台开发，只需要更新对应架构的 apk 即可。编译到 ROM 中的路径为 product/app/webview/ ，而不是以前的 /sytem/app/webview/ 。
-3. 到了 ANdroid 10，关于 WebView 你又有三种选择。
+3. Android 10 开始引入动态分区，所以在 ROM 镜像文件中找不到熟悉的 system.img，取而代之的是 super.img，super.img 包含 system, product, vendor 三个子分区。AOSP 预编译的 webview 被打包到 product 子分区。
+
+4. 到了 Android 10，关于 WebView 你又有三种选择。
    * 独立的 Webview，也就是上面提到的预编译的 weview.apk。要在 chromium 中编译出来，构建目标选择 system_webview_apk，生成的输出文件称为 SystemWebView.apk。
    * Monochrome，一个单独的 APK，包含整个 WebView 实现，以及一个完整的基于 Chromium 的网络浏览器。 由于 WebView 和 Chromium 浏览器共享许多通用源代码，因此Monochrome APK 比具有单独的 WebView APK 和浏览器 APK 小得多。如果你的系统需要像 Chrome 这样的全功能浏览器，可以选择这种 WebView 变体。在 chromium 中构建目标称为 monochrome_public_apk，生成的输出文件称为 MonochromePublic.apk。
    * Trichrome， 由三个 APK/AAB 组成：
@@ -23,9 +25,9 @@
      * TrichromeChrome 包含特定于浏览器的代码和数据，并为用户提供基于 Chromium 的网络浏览器。
      * TrichromeLibrary 包含共享代码和数据，仅用作 TrichromeWebView 和 TrichromeChrome 的内部实现细节。
 
-    这三个 Trichrome APK 的大小与 Monochrome 大致相同，提供相同的优势，如果是 Android 10 及以上系统，且需要全功能浏览器，推荐使用这种 WebView 变体。在 Chromium 中的构建目标分别称为 trichrome_webview_apk、trichrome_chrome_bundle 和 trichrome_library_apk，生成的输出文件为 TrichromeWebView.apk、TrichromeChrome.aab 和 TrichromeLibrary.apk。
+    这三个 Trichrome APK 的大小与 Monochrome 大致相同，具有相同的优势，如果是 Android 10 及以上系统，且需要全功能浏览器，推荐使用这种 WebView 变体。在 Chromium 中的构建目标分别称为 trichrome_webview_apk、trichrome_chrome_bundle 和 trichrome_library_apk，生成的输出文件为 TrichromeWebView.apk、TrichromeChrome.aab 和 TrichromeLibrary.apk。
 
-4. 关于 Webview 版本的选择，官方推荐使用最新的稳定版本，你可以访问
+5. 关于 Webview 版本的选择，官方推荐使用最新的稳定版本，你可以访问
 
    > https://chromiumdash.appspot.com/releases?platform=Android 
 
