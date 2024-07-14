@@ -54,11 +54,11 @@ testGeminiNano();
 
 **Brave 浏览器** 是一个以隐私和安全为核心设计的 Web 浏览器，在最新的 nightly build 中发现在侧边栏增加了一个名为 Leo 的 AI 助手。
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202407/images/using_deepin_01.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202407/images/ai_browser_01.png)
 
 点开就可以也 AI 对话。 Leo 支持多种大模型，也支持添加自定义大模型：
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202407/images/using_deepin_02.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202407/images/ai_browser_02.png)
 
 和网页深度集成：
 
