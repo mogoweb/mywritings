@@ -80,14 +80,14 @@ Chorme 浏览器安装 Monica 插件后，会多一个图标，点开后出现 A
 
 再看看与网页的集成特性。浏览网页时，如果选择了网页上的文字，或者网页中有文字内容，就会出现一个 Monica 助手的图标，可以对网页做总结、翻译、做笔记等等。
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202407/images/ai_browser_06.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202407/images/ai_browser_05.png)
 
 还可以进行重写、扩写等等。
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202407/images/ai_browser_07.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202407/images/ai_browser_06.png)
 
 Monica 后端接入的是 ChatGPT-4o、Claude 3.5、Gemini 1.5 几种模型，未来会接入更多的大模型，但不支持自定义接入大模型。Monica 提供免费使用，每天只有 40 个查询量，如果觉得不错，可以订阅套餐，提供了 Pro、Pro+ 和 Unlimited 三种套餐。
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202407/images/ai_browser_08.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202407/images/ai_browser_07.png)
 
 通过在浏览器中集成AI技术，可以显著提升用户体验、增强功能和提高效率。智能搜索和推荐、自动化任务执行、增强安全性、提高网页加载速度以及先进的语音和图像识别功能，都是AI赋能浏览器的重要体现。未来，随着AI技术的不断发展和成熟，浏览器将变得更加智能和强大，为用户提供更加优质和高效的互联网体验。
