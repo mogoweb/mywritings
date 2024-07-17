@@ -221,7 +221,7 @@ $ autoninja -C out/Default chrome
 
 ## 小结
 
-使用 deepin 作为开发系统，具有如下优点：
+总结一下，使用 deepin 作为开发系统，具有如下优点：
 
 * **美观的用户界面**：Deepin Linux 以其优雅和现代的界面设计著称，提供了良好的用户体验。
 * **易于使用**：Deepin Linux 注重用户体验，提供了简洁直观的界面和操作方式。
