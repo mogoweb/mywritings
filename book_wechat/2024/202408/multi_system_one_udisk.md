@@ -8,37 +8,39 @@
 
 访问 [Ventoy官网](https://www.ventoy.net/cn/index.html) https://www.ventoy.net/cn/index.html 后，发现这似乎是一位大神的个人作品，但功能非常强大，使用也很简单。它不仅支持 Windows 和 Linux 操作系统，还完美兼容国产系统。
 
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_udisk_01.png)
+
 下载最新版的 Ventoy 后，解压缩得到以下文件：
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_disk_02.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_udisk_02.png)
 
 插入 U 盘，双击 Ventoy2Disk.exe：
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_disk_03.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_udisk_03.png)
 
 点击“安装”按钮即可完成操作。这个步骤会重新分区 U 盘，因此请确保 U 盘上没有重要数据。制作完成后，你会发现 U 盘里空空如也，没有任何文件：
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_disk_04.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_udisk_04.png)
 
 不用担心，实际上这个 U 盘还有一个引导分区，只是在插入电脑时不会自动挂载。你只需将国产系统的 ISO 镜像文件复制到 U 盘中即可。只要 U 盘容量足够大，你可以复制多个镜像文件，比如我就一次性复制了 4 个：
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_disk_05.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_udisk_05.png)
 
 重启电脑，将启动设备设置为 U 盘，你会看到如下选项：
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_disk_06.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_udisk_06.jpg)
 
 界面上显示的正是前面复制的镜像文件名。选择其中一个后，会进入一个选择界面：
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_disk_07.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_udisk_07.jpg)
 
 通常选择第一个即可。接下来就会进入国产系统的引导界面：
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_disk_08.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_udisk_08.jpg)
 
 参照我之前的文章《[低成本使用国产系统的几种方式](https://mp.weixin.qq.com/s/GHZPyFXVf6f6rAfQbvrkzg)》，你甚至可以使用 LiveUSB 模式，直接在 U 盘上运行系统而无需安装：
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_disk_09.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/multi_system_one_udisk_09.png)
 
 如果试用满意，可以双击桌面上的“安装UOS”，进入安装模式。
 
