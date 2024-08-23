@@ -28,7 +28,7 @@ steam 默认界面是英文，进入到设置改成中文。
 
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_06.png)
 
-接下来就是购买流程，这里略过。steam 虽然是国外的游戏平台，但支持微信支付和支付宝付款，基础版本是268元。
+接下来就是购买流程，这里略过。steam 虽然是国外的游戏平台，但支持微信支付和支付宝付款，基础版本是 268 元。
 
 购买之后安装，提示当前平台不支持。经过一番摸索，需要进设置修改兼容性选项。
 
@@ -49,3 +49,43 @@ steam 默认界面是英文，进入到设置改成中文。
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_15.png)
 
 修改后，这次启动没问题了，只是第一次启动有点慢。
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_16.png)
+
+着色器编译需要一点时间，请耐心等待。编译完毕后，接下来有一些设置界面。这款游戏国际化做得还不错，支持多种语言，看来为出海做了不少工作。作为中国用户，可以将界面文字和字幕、对话设置成中文。
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_17.png)
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_18.png)
+
+下面要设置亮度，不是很理解，照做就是。
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_19.png)
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_20.png)
+
+游戏主界面出现：
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_22.png)
+
+点击新游戏之后，是一段视频，算是整个游戏的背景介绍，放几张截图。
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_25.png)
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_26.png)
+
+然后就开打。不知道是不是截图的问题，对战画面截图都是模糊的，实际上显示效果还是不错的。
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_27.png)
+
+不过对我这个游戏菜鸟来说，第一关打斗就过不去。本来打算录一段视频，结果打了半天，也没结束这一段，还是不献丑了。
+
+玩这款游戏，官方推荐使用游戏手柄，键盘鼠标也是支持的，只是感觉操作起来会比较麻烦一些。
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_28.png)
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202408/images/deepin_game_29.png)
+
+整个探索过程就此结束，现在问题来了，steam 支持游戏转让吗？我其实对玩游戏兴趣不大，掏钱购买这款游戏，一方面是支持国产游戏，另一方面也是为了做这个验证，有点浪费，要是能转让给需要的朋友就好了。
+
+大家都在哪些平台上玩黑神话悟空，欢迎留言！
