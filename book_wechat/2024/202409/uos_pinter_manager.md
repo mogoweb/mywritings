@@ -1,67 +1,5 @@
 # 统信打印管理器新版发布，办公打印不用愁
 
-前面写过一篇文章《[国产芯片+国产操作系统打造办公系统](https://mp.weixin.qq.com/s/6vI8zfO2okOyGR1aqNzEAg)》，介绍了我使用统信 UOS 系统作为办公系统的体验。有朋友留言说，国产信创系统对打印机的支持不好。很多朋友还停留在以前 Linux 系统的老印象上，其实现在国产系统对打印机的支持已经比较完善了。比如，我现在使用的统信 UOS 系统，就集成了一个打印管理器 App，简化了打印机的管理，已经成为我的办公得力助手。
-
-近日，统信打印管理器又发布了新版本（v1.0.23），可通过应用商店进行升级。这个版本主要解决了用户关注的获取打印驱动、使用打印机等方面的问题，建议各位朋友升级新版本，以后再也不会因为打印机问题而发愁。
-
-让我们看看最新的打印管理器带来了哪些变化：
-
-
-
-## 第一变：突破操作难关
-
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202409/images/uos_printer_manager_01.png)
-
-✔ 提供更多帮助指南
-
-增加多处打印机使用帮助信息，在问题出现时就能找到解决方法。在窗口右下角的按钮“使用说明”中聚合帮助信息，包含：驱动下载导航、常见问题使用帮助...
-
-✔ 简化共享操作步骤
-
-共享打印机操作已被封装为“一键共享”，只需前往打印机详情界面，启用“共享打印机”开关，即可完成打印机共享，实现局域网内访问。 
-
-✔ 用户体验细节优化
-
-“添加打印机”按钮视觉设计重构，更加醒目和突出。聚合打印机的管理工具，你现在可以在打印机详情界面，通过“管理助手”使用驱动内置的功能。
-
-## 第二变：获取驱动技能
-
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202409/images/uos_printer_manager_02.png)
-
-✔ 打印管理器推荐
-
-扩充打印机驱动库并对驱动查询进行优化，使用自动查找、自动查找添加打印机时，推荐选择带有“推荐”标识的打印机驱动，这将极大提高添加打印机的操作成功率。
-
-✔ 生态适配清单
-
-如需拷贝打印机驱动安装在离线电脑上，建议访问统信软件生态官网查询下载。生态适配清单覆盖惠普、奔图、佳能、联想、兄弟等30+主流品牌、1000+常见机型，为所有用户提供便捷的打印驱动查询下载服务。
-
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202409/images/uos_printer_manager_03.png)
-
-## 第三变：常见问题处理
-
-统信有一个官方论坛，汇总了部分打印机管理器常见问题及解决办法，供大家参考，可点击小程序卡片进入 deepin 论坛首页置顶区域查看，或在微信公众号后台发送【打印机】获取链接。
-
-[小程序]()
-
-也可在系统【打印机设备】-【打印机添加与使用帮助】中查看更多常见问题及解决办法。
-
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202409/images/uos_printer_manager_04.png)
-
-最后，通过更新的方式同样有助于解决打印机使用问题，现在不妨前往统信应用商店更新打印管理器吧！
-
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202409/images/uos_printer_manager_05.png)
-
-如果您还有使用打印机时遇到的其它问题，可以点击“阅读原文”进一步了解更多打印机相关的问题处理方法。
-
-https://faq.uniontech.com/desktop/peripheral?from=industrynews
-
-
-
-经过润色后的文章如下：
-
----
-
 在之前的文章《[国产芯片+国产操作系统打造办公系统](https://mp.weixin.qq.com/s/6vI8zfO2okOyGR1aqNzEAg)》中，我分享了自己使用统信 UOS 作为办公系统的体验。有人反馈说，国产信创系统对打印机的支持不太好。其实，很多人对于国产操作系统，甚至是 Linux 系统的认识，依旧停留在过去。如今，国产系统对打印机的兼容性和支持已显著提升。就拿我目前使用的统信 UOS 来说，它内置了一个非常好用的打印管理器 App，极大简化了打印机的管理，成为我工作中的得力助手。
 
 最近，统信打印管理器发布了全新版本（v1.0.23），通过应用商店即可轻松升级。新版本主要解决了用户关注的打印驱动获取和打印机使用问题，建议大家尽快更新。这次更新不仅让打印机的管理更加高效，也彻底解决了打印相关的烦恼。
@@ -112,8 +50,4 @@ https://faq.uniontech.com/desktop/peripheral?from=industrynews
 
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202409/images/uos_printer_manager_05.png)
 
-如果您还有其他打印相关问题，可以点击“阅读原文”，进一步了解更多问题的解决方法。
-
----
-
-这样润色后的内容更加连贯，并突出了文章的重点，让读者在阅读时可以快速掌握要点。
+如果您还有其他打印相关问题，可以点击“[阅读原文](https://faq.uniontech.com/desktop/peripheral?from=industrynews)”，进一步了解更多问题的解决方法。
