@@ -1,20 +1,17 @@
 # 将 QT 应用程序打包成如意玲珑软件包
 
-在上一篇文章《[国产系统之如意玲珑](https://mp.weixin.qq.com/s/VE41M9pCsEEMCJGyRwaroQ)》中，我为大家介绍了一种创新的国产软件包 - 如意玲珑。如意玲珑（Linyaps）是一种新型的独立包管理工具集，专注于解决Linux系统下由传统软件包格式的复杂性和交叉依赖关系引起的兼容性问题。
+在上一篇文章《[国产系统之如意玲珑](https://mp.weixin.qq.com/s/VE41M9pCsEEMCJGyRwaroQ)》中，我为大家介绍了一款创新的国产软件包管理工具——如意玲珑（Linyaps）。该工具集致力于解决 Linux 系统下传统软件包格式带来的复杂性和依赖问题，提供了一种更独立、更简洁的打包和管理方式。
 
-这篇文章通过将一个简单的 QT 应用程序打包成玲珑包，给大家展示一下玲珑包的制作过程。如意玲玲项目的官网提供了一些文档和示例，但在项目实际中仍然碰到了许多问题，这个探索过程中踩了不少坑，希望能对大家有所帮助。
+本文将通过一个简单的 QT 应用示例，带大家走一遍如何将其打包成玲珑包的过程。虽然如意玲珑项目的官网提供了一些文档和示例，但在实际项目中仍会遇到不少问题，我也在这次探索中踩了些坑，希望这篇文章能为大家提供一些帮助。
 
 本文使用的开发环境为 Deepin V23 系统，Qt Creator 13.0.2，Qt 库使用的版本为 5.15.2。源码托管在
 
 >  https://e.coding.net/mogoweb/qt-in-action/qt-in-action.git
 
-本文使用的源码在 LingLongDemo 目录下，供参考。
+文中用到的源码位于 `LingLongDemo` 目录下，供大家参考。
 
 ## 1. 创建一个简单的 QT 工程
 
-因为本文只是为了展示玲珑包的制作过程，所以就以一个简单的 QT Widget 应用为例。
-
-第一步，在 Qt Creator 中新建一个 Qt Widgets Application。
 
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202410/images/package_linglong_01.png)
 
@@ -22,7 +19,7 @@
 
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202410/images/package_linglong_03.png)
 
-简单修改以下窗体里的显示，最后运行显示如下：
+简单修改一下窗体里的显示，最后运行显示如下：
 
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202410/images/package_linglong_04.png)
 
@@ -50,11 +47,11 @@ StartupNotify=false
 Type=Application
 ```
 
-文件内容很好理解，Exec 指定了可执行程序的文件名，Name 指定应用程序名称。
+其中，`Exec` 指定可执行程序名，`Name` 则为应用程序的名称。
 
 ## 修改 qmake 文件
 
-修改 LingLongDemo.pro 文件的内容：
+在 `LingLongDemo.pro` 文件中添加以下内容：
 
 ```
 QT       += core gui
