@@ -10,7 +10,7 @@
 
 打开包装，拿出迷你主机，整体设计方正硬朗，通体黑色。中央的 Logo 简洁有力，唯一美中不足的是底部的“MOREFINE”字样，略显多余，有些破坏整体的美感。
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202412/images/loongson_03.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202412/images/loongson_03.jpg)
 
 主机正面布局简洁，配备电源按钮、两个 USB 3.0 接口和一个 Type-C 接口。
 
