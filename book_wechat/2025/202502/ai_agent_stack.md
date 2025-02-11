@@ -37,7 +37,7 @@ AI Agents 的技术栈总体架构如上图所示。大体上可分为五个关�
 
 ### 2. 存储层（Storage）
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202502/images/ai_agent_stack_02.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202502/images/ai_agent_stack_03.png)
 
 - 向量数据库：Chroma、Weaviate 等用于存储 Agent 的“外部记忆”，支持大容量数据检索增强生成（RAG）。
 - 传统数据库扩展：Postgres 通过 pgvector 支持向量搜索，Neon 和 Supabase 提供无服务器化存储方案。
@@ -45,7 +45,7 @@ AI Agents 的技术栈总体架构如上图所示。大体上可分为五个关�
 
 ### 3. 工具与库（Tools & libraries）
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202502/images/ai_agent_stack_03.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202502/images/ai_agent_stack_04.png)
 
 标准 AI 聊天机器人与 AI Agent 的主要区别之一在于，Agent 能够调用“工具”（或“函数”）。通常情况下，LLM 会生成结构化输出（如JSON对象），指定要调用的函数及其参数。一个常见的误解是，工具的执行并不是由 LLM 提供商完成的 —— LLM仅负责选择调用哪个工具以及提供什么参数。支持任意工具或参数的 Agent 服务必须使用沙箱（如Modal、E2B）来确保安全执行。
 
@@ -53,7 +53,7 @@ Agent 通过 OpenAI 定义的 JSON 模式调用工具，这意味着不同框架
 
 ### 4. Agent 框架
 
-![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202502/images/ai_agent_stack_04.png)
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202502/images/ai_agent_stack_05.png)
 
 Agent 框架用于协调大语言模型（LLM）调用并管理Agent的状态，不同框架在设计上存在差异，主要体现在以下几个方面：
 
@@ -71,6 +71,8 @@ Agent 框架用于协调大语言模型（LLM）调用并管理Agent的状态，
 
 ### 5. Agent 托管与服务化
 
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202502/images/ai_agent_stack_06.png)
+
 目前，大多数 Agent 框架设计的 Agent 仅存在于 Python 脚本或 Jupyter 笔记本中，无法脱离这些环境运行。我们认为，未来的趋势是将 Agent 作为一种服务部署到本地或云基础设施中，并通过 REST API 进行访问。类似于 OpenAI 的 ChatCompletion API 成为与 LLM 服务交互的行业标准，我们预计未来也会出现一个主流的 Agent API 标准，但目前尚未有明确的选择。
 
 将 Agent 部署为服务比部署 LLM 服务更为复杂，主要因为涉及状态管理和安全工具执行的问题。工具及其所需的依赖和环境需要明确存储在数据库中，因为服务需要重新创建运行环境（当工具和 Agent 在同一个脚本中运行时，这不是问题）。应用程序可能需要运行数百万个Agent，每个 Agent 都会积累越来越多的对话历史。从原型开发到生产环境时， Agent 状态必须经过数据规范化处理，且 Agent 交互必须通过 REST API 定义。目前，这一过程通常由开发者自行编写FastAPI和数据库代码完成，但随着 Agent 技术的成熟，我们预计这些功能将更多地嵌入到框架中。
@@ -79,3 +81,4 @@ Agent 框架用于协调大语言模型（LLM）调用并管理Agent的状态，
 ## 小结
 
 AI Agents 技术栈的成熟标志着人工智能从“工具”向“合作伙伴”的转变。2025 年，随着框架标准化（如 Letta 的数据库驱动模型）与工具生态的完善，AI Agents 将深入更多领域，重塑工作与生活方式。
+
