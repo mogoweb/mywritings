@@ -118,7 +118,7 @@ if (fDriverBugWorkarounds.gl_clear_broken) {
     fPerformColorClearsAsDraws = true;
     fPerformStencilClearsAsDraws = true;
 }
-···
+```
 
 ## GPU 状态&开关
 
