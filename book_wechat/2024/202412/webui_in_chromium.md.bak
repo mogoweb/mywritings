@@ -1,0 +1,5 @@
+# Chromium 浏览器中的 WebUI
+
+Chromium 浏览器的UI界面主要分两种，一种是原生UI，另外一种是 WebUI。原生 UI 采用 C++ 语言开发，使用了操作系统的原生 UI 框架，比如在 Linux 下，使用 GTK+ 框架。而 WebUI 则是基于 HTML/CSS/JS 开发。下图是一张典型的 Chromium 浏览器界面，在地址栏以上的 UI 区域就是原生 UI，而用红线框起来的区域显示的则是 WebUI。
+
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2024/202412/images/webui_in_chromium_01.png)
