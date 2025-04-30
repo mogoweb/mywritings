@@ -10,23 +10,31 @@
 > 新世界（ABI 2.0）
 > 自 2021 年起，龙芯完全剔除历史遗留的 MIPS 组件，从指令集到软件栈全面重构，严格遵循开源社区规范。新世界架构已被 Linux 5.19 内核及主流编译器（如 GCC）原生支持，社区发行版（如 Arch Linux LoongArch 社区版）也相继涌现。  
 
-都说要打破旧世界，拥抱新世界，作为程序员，忍不住也要尝尝鲜。
+“打破旧世界，拥抱新世界”——作为程序员，自然要第一时间尝鲜，于是立刻将这台龙芯迷你主机安装了 Deepin V23 龙芯版（目前仍为 Preview 版本，但足够试水）。
 
-说做就做，立即行动起来，给这台龙芯迷你主机装上了 deepin v23。目前 deepin v23 龙芯版还是 preview 阶段，尝鲜可以。
+## 初探 Deepin V23 龙芯版
 
-安装过程很顺利，然后就进入了 deepin v23 的系统，还是熟悉的界面，系统自带的应用都还在，但没有应用商店，浏览器是 firefox。
+安装过程十分顺利，进入系统后依旧是熟悉的 Deepin 界面，内置应用齐全，只是暂未集成应用商店，浏览器默认 Firefox。
 
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202504/images/loongson_new_world_01.png)
 
-没有应用商店，对于普通用户来说是麻烦了一些，但这难不倒程序员，自己动手吧。
+对于普通用户来说，没有应用商店确实略显不便，但对程序员而言，这正是动手的好时机。
 
-首先想到要安装的应用是微信，微信发布了 Linux 原生版，而且还提供了龙芯架构，这点还不错。下载地址是：
+## 第一战：安装微信
+
+首先想要体验的当然是微信。好在腾讯已经发布了 Linux 原生版，并且提供了 LoongArch 架构支持。登录官网下载 LoongArch 版安装包：
 
 > https://linux.weixin.qq.com/
 
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202504/images/loongson_new_world_02.png)
 
-选择 LoongArch 版下载，但是安装时却出现如下错误：
+选择 LoongArch 版下载，下载后执行：
+
+```
+sudo dpkg -i WeChatLinux_LoongArch.deb
+```
+
+却报错提示：
 
 ```
 uos@uos-loongson-PC:~/Downloads$ sudo dpkg -i WeChatLinux_LoongArch.deb 
@@ -38,20 +46,25 @@ dpkg: 处理归档 WeChatLinux_LoongArch.deb (--install)时出错：
  WeChatLinux_LoongArch.deb
 ```
 
-查了一下原因，是因为新世界和旧世界两大生态之间不兼容，旧世界的软件需通过 **liblol** 兼容层才能在新世界环境中运行。现在的龙芯架构应用基本上都是为龙芯旧世界开发的。
+原来，新世界（ABI 2.0）与旧世界（ABI 1.0）不兼容——旧世界软件需要通过 **libLoL** 兼容层才能在新世界环境中运行。眼下，绝大多数龙芯架构应用都只面向旧世界 ABI 开发。
 
-要在新世界上运行旧世界的应用，首先需要修改安装包的架构，这个可以通过 AOSC 社区提供的一个脚本来实现。
+### 使用脚本修改包架构
+
+通过 AOSC 社区提供的脚本，可将旧世界的 .deb 包内部架构由 loongarch64 修改为 loong64：
 
 > https://raw.githubusercontent.com/AOSC-Dev/scriptlets/refs/heads/master/loong64-it/loong64-it.bash
 
 这个脚本会直接修改 deb 包里的架构为 loong64，这样就可以在新世界上安装该 deb 包了。
 
 ```
-uos@uos-loongson-PC:~$ chmod a+x loong64-it.bash 
-uos@uos-loongson-PC:~$ ./loong64-it.bash Downloads/WeChatLinux_LoongArch.deb
+# 下载并赋予执行权限
+chmod a+x loong64-it.bash
+
+# 执行脚本转换安装包
+./loong64-it.bash Downloads/WeChatLinux_LoongArch.deb
 ```
 
-在脚本处理的最后，会有一行提示：
+脚本运行完毕，会提示：
 
 ```
 [INFO]:  Your requested package:
@@ -74,7 +87,9 @@ For details on how to install and configure libLoL.
 sudo apt install liblol
 ```
 
-安装了 liblol 后，从启动菜单点击**微信**图标，又是一点反应都没有。作为程序员，当然不甘心止步如此，于是就从命令行启动微信：
+### 解决依赖：补齐缺失的共享库
+
+安装了 liblol 后，从启动菜单点击**微信**图标，又是一点反应都没有。作为程序员，当然不甘心就此止步，于是就从命令行启动微信：
 
 ```
 uos@uos-loongson-PC:~$ /usr/bin/wechat
@@ -160,7 +175,7 @@ uos@uos-loongson-PC:~$ /usr/bin/wechat
         libbrotlicommon.so.1 => /lib/loongarch64-linux-gnu/libbrotlicommon.so.1 (0x00007fffe72dc000)
         libgpg-error.so.0 => /lib/loongarch64-linux-gnu/libgpg-error.so.0 (0x00007fffe72ac000)
 ```
-然后搜了一下，有些so，比如 libvoipCodec.so 等，是微信 deb 包安装的，安装在 /opt/wechat 下，有些是 /usr/lib64/，加上这些加载路径：
+然后搜了一下，一些私有库，比如 libvoipCodec.so 等，是微信 deb 包安装的，安装在 /opt/wechat 下，有些是 /usr/lib64/，需要将它们加入加载路径：
 
 ```
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wechat：/usr/lib64/
@@ -172,7 +187,7 @@ export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/wechat：/usr/lib64/
 sudo ln -s /lib/loongarch64-linux-gnu/libtiff.so libtiff.so.5
 ```
 
-经过这一番操作，微信总算是能够启动了。虽然还有一些错误提示，但不影响功能使用。
+经过以上配置，微信终于可以启动。尽管终端仍会打印一堆警告和错误信息，但不影响功能。
 
 ```
 $ /usr/bin/wechat 
@@ -192,13 +207,19 @@ KMS: DRM_IOCTL_MODE_CREATE_DUMB failed: Permission denied
 ```
 ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202504/images/loongson_new_world_03.png)
 
-接下来就是写一个脚本，将上面的加载路径加载，然后修改 desktop 文件，后面再打开微信就不用从命令行了，这里不赘述了。
+最后，我还编写了一个简单脚本，自动设置环境变量并更新桌面快捷方式，这样就可以直接从应用菜单启动微信，不必每次都输入命令。
 
-经过这样一番操作，终于搞定了微信的使用问题。这些操作对于程序员来说，没有难度，但是对于普通用户来说，相当不友好。在新旧交替的过渡阶段，总会是相当麻烦的事情。就如同 Windows 系统过渡到国产系统，App 的适配与兼容问题，就是花了好长时间来慢慢磨合。
+## 体验小结
 
-这里需要提一句，liblol 是安同开源社区提供的一种解决方案，在其官方网站上有如下介绍：
+经过这样一番操作，终于搞定了微信的使用问题。这些操作对程序员而言并不复杂，但对于普通用户就极不友好。新旧世界的过渡，注定是一段坎坷历程。正如国内操作系统要从 Windows 生态切换到国产发行版，App 适配与兼容问题同样需要漫长时间来磨合。
+
+值得一提的是，libLoL 是安同开源社区提供的旧世界 ABI 兼容解决方案，其官方说明写道：
 
 > libLoL (LoongArch on LoongArch) 是一款用于提供旧世界 ABI 兼容性的运行时。旧世界 ABI 常用于为龙芯提供的 Loongnix 参考发行版和统信 UOS 设计的商业软件，如腾讯 QQ Linux 版、金山 WPS for Linux 和龙芯浏览器等。由于这些应用程序尚未移植到新世界 ABI 上，本运行时旨在为新世界发行版用户提供运行上述应用程序的便利。
 
 龙芯公司也意识到新旧世界的切换不会是那么顺利的一件事，也提供了自己的解决方案，目前这套方案还未公开，希望龙芯能够从底层完美解决新旧世界应用的兼容问题，再也不要像我运行一个微信应用都要这么折腾了。本来龙芯架构上的应用就少，再这么折腾，更是要吓走用户。
 
+## 延伸知识
+
+1. 旧世界与新世界: https://areweloongyet.com/docs/old-and-new-worlds/
+2. libLoL: 为您在新旧世界之间架起桥梁！ https://liblol.aosc.io/
