@@ -64,7 +64,7 @@ if (!system_nssdb_dir.empty()) {
    证书数据库可以去网上找，比如沃通的根证书可以去[这里](https://wosign.com/WotrusRoot/index.htm)下载。
    ![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202505/images/add_nss_db_02.png)
 3. **启动 Chromium 并验证**：打开 Chromium（确保使用与之关联的 `$HOME` 的 NSSDB），访问一个配置国密的站点, 比如 [https://sm2only.ovssl.cn](https://sm2only.ovssl.cn)，观察是否正常打开。同时，在 `chrome://settings/certificates` 中查看“受信任的根证书”列表，确认该 CA **不出现在界面内**（因为它仅存在只读数据库中）。
+![](https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202505/images/add_nss_db_03.png)
 4. **使用命令行验证**：可以分别列出两个数据库的证书：`certutil -L -d sql:$HOME/.pki/nssdb`（用户库）应**无**国密 CA；而 `certutil -L -d sql:/opt/apps/org.mojo.browser/files/.pki/nssdb` 则应含有 “国密 CA”。这确保 GUI 只见用户库内容，Chromium 信任链查询却能看到系统库证书。
 
 通过以上步骤，我们就可以将国密根证书预置到浏览器中并生效，同时仍然支持通过设置界面导入根证书。
-
