@@ -91,7 +91,8 @@ WINEDEBUG=+relay wine hello.exe > relay_log.txt 2>&1
 
 ```bash
 winedbg hello.exe
-```进入`winedbg`提示符后，您可以设置断点，例如在 `MessageBoxA` 函数上：
+```
+进入`winedbg`提示符后，您可以设置断点，例如在 `MessageBoxA` 函数上：
 
 ```
 winedbg> b MessageBoxA
@@ -101,7 +102,8 @@ winedbg> b MessageBoxA
 
 ```
 winedbg> cont
-```程序将在调用 `MessageBoxA` 时中断，此时您可以检查调用堆栈、变量等信息，从而更深入地了解 Wine 是如何处理这个 API 调用的。
+```
+程序将在调用 `MessageBoxA` 时中断，此时您可以检查调用堆栈、变量等信息，从而更深入地了解 Wine 是如何处理这个 API 调用的。
 
 ```
 Wine-dbg>b MessageBoxA
