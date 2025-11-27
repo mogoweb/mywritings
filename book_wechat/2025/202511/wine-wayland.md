@@ -1,4 +1,4 @@
-# 探索纯正的 wine-wayland： 如何让 Windows 应用运行在纯 Wayland 桌面环境
+# 探索纯正的 Wine-Wayland：让 Windows 应用真正运行在纯 Wayland 桌面环境中
 
 在《[干得漂亮，Ubuntu终于干掉了 X11]()》这篇文章中，介绍了 Ubuntu 25.10 正式弃用 GNONE 的 Xorg/X11 会话，只支持 Wayland。无独有偶，另一大主流 Linux 发行版 Fedora 也宣布从 Fedora 43 起，桌面环境切换为 Wayland-only。 目前，大多数 Linux 版本已经将 Wayland 设为默认，经过了这几年的检验，终于可以向 X11 说声再见。
 
