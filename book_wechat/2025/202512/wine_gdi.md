@@ -1,6 +1,6 @@
 # Wine 中 GDI 绘制的实现原理分析与架构解读
 
-在上一篇文章《[Wine 是如何加载图形驱动的？](https://mp.weixin.qq.com/s/GdydTFRzmYw4xXUeSzSPww)》中，我介绍了 Wine 通过非常精巧的手法，实现了可以对接不同的窗口系统与图形后端。这篇文章将更进一步，具体分析 Wine 是如果将 Windows 中的 GDI 绘制转接到不同的实现上的。
+在上一篇文章《[Wine 是如何加载图形驱动的？](https://mp.weixin.qq.com/s/GdydTFRzmYw4xXUeSzSPww)》中，我们探讨了 Wine 如何通过其精巧的架构，适配多种不同的窗口系统与图形后端。本文将在此基础上进一步深入，具体分析 Wine 是如何将 Windows 中的 GDI 绘制功能转换并适配到不同后端实现上的。
 
 GDI（Graphics Device Interface）是伴随着 Windows 而出现的，从现在的眼光看，似乎有些落伍。随着现代 Windows UI 框架 WPF / UWP / WinUI / XAML 等的出现，似乎 GDI 早就该退出历史舞台了。但别忘了，Windows 的核心竞争力之一是：
 
@@ -10,7 +10,7 @@ GDI 是 Win32 API 最稳定、最早被广泛使用的一部分之一。可以�
 
 ## 一、GDI 在 Windows 中的作用是什么？
 
-### 1. GDI 是传统 2D 桌面绘制接口
+### 1.1 GDI 是传统 2D 桌面绘制接口
 
 GDI 是 Windows 最早期、也是最经典的图形接口之一，其核心目标是：
 
@@ -26,7 +26,7 @@ GDI 是 Windows 最早期、也是最经典的图形接口之一，其核心目�
 
 **一次绘制，多种设备输出**是 GDI 设计时的核心理念。
 
-### 2. GDI 的关键抽象：HDC（设备上下文）
+### 1.2 GDI 的关键抽象：HDC（设备上下文）
 
 所有 GDI 绘制都围绕 HDC（Handle to Device Context） 展开。
 
@@ -43,7 +43,7 @@ HDC 抽象了：
 
 这也是 GDI 能长期存在的重要原因。
 
-### 3. GDI 不擅长什么？
+### 1.3 GDI 不擅长什么？
 
 GDI 的设计限制包括：
 
@@ -53,7 +53,7 @@ GDI 的设计限制包括：
 * 不适合高帧率实时渲染
 * DPI / 缩放支持是后来补充实现的
 
-### 4. GDI+
+### 1.4 GDI+
 
 GDI+ 并不是 GDI 的继任者，而是一个建立在 GDI 之上的补充层。GDI+ 的绘制最终仍然要落到 GDI（或底层设备）上：
 
@@ -93,7 +93,7 @@ GDI（HDC）
 * 字体（font_physdev，font.c）
 * 路径（path_physdev，path.c）：用于记录 GDI Path
 
-### 1. `gdi_physdev` 是如何被“定位 / 选中”的？
+### 2.1 `gdi_physdev` 是如何被“定位 / 选中”的？
 
 `gdi_physdev` 的选择不是全局的，而是：
 
@@ -108,7 +108,7 @@ GDI（HDC）
 
 这些函数最终都会走到 DC 初始化路径。
 
-### 2. DC 初始化过程中发生了什么？
+### 2.2 DC 初始化过程中发生了什么？
 
 在 DC 创建时，Wine 会构建一个 DC 对象，并维护一个 physdev 链表（注意：是链表）：
 
@@ -147,7 +147,7 @@ DC
 * 修改参数
 * 决定是否继续向下传递
 
-### 3. GDI 驱动栈架构
+### 2.3 GDI 驱动栈架构
 
 Wine 使用一种基于优先级的驱动栈结构，**驱动优先级决定了驱动入栈时，驱动在栈中的所在的层级**。每个驱动的优先级都有预先定义好的固定值，比如path_driver的优先级为400。
 
