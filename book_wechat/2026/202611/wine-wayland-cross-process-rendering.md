@@ -1,14 +1,16 @@
 # 上游正式合入！Wine 有了 Wayland 跨进程渲染方案，CEF 类 Windows 应用有望告别白屏
 
-> 昨天，我在查看 wine 上游提交记录时，发现合入了一个新提交： https://gitlab.winehq.org/wine/wine/-/merge_requests/12506，首次在 win32u 层实现了**跨进程 OpenGL 呈现**。提交说明直言目标："它应当修复 CEF 应用在 wayland 驱动 + wined3d 下的渲染"。为此，我拉取了 master 分支最新代码，切换到 wayland 模式，验证 CEF 官方示例 cefclient（Chromium 142），确实页面正常渲染，不再白屏了。
+昨天，我在查看 wine 上游提交记录时，发现合入了一个新提交： https://gitlab.winehq.org/wine/wine/-/merge_requests/12506，首次在 win32u 层实现了**跨进程 OpenGL 呈现**。提交说明直言目标："它应当修复 CEF 应用在 wayland 驱动 + wined3d 下的渲染"。
 
 ![](./images/wine_wayland_cef_02.png)
 
-## 一、难在哪：Wayland 的"窗口所有权"安全模型
+为此，我拉取了 master 分支最新代码，切换到 wayland 模式，验证 CEF 官方示例 cefclient（142版本），确实页面正常渲染，不再白屏了。
 
-近一年来，deepin-wine 团队一直在进行 wine wayland 适配工作，也取得了很大的进展，所以对 wine wayland 适配的难点还是非常清楚的。
+近一年来，deepin-wine 团队一直在进行 wine wayland 适配工作，取得了很大的进展，所以对 wine wayland 适配的难点还是非常清楚的。
 
-先看 Windows 上 CEF 是怎么工作的。Chromium 是多进程架构：浏览器进程拥有所有窗口（HWND），GPU 进程负责真正的绘制。渲染产物通过共享纹理 / DirectComposition 表面交给浏览器进程合成上屏。这一切成立的前提，是 Windows 的窗口模型对"跨进程"非常宽容：
+先看 Windows 上 CEF 是怎么工作的。
+
+Chromium 是多进程架构，浏览器进程拥有所有窗口（HWND），Renderer/GPU 进程负责真正的绘制。在GPU渲染模式下，渲染产物通过共享纹理 / DirectComposition 表面交给浏览器进程合成上屏。这一切成立的前提，是 Windows 的窗口模型对跨进程非常宽容：
 
 | | Windows | Wayland |
 |---|---|---|
@@ -21,17 +23,17 @@
 
 有了 linux-dmabuf 协议，真正的难点只有两个：
 
-1. 谁来完成只有属主能做的"attach + commit"；
+1. 谁来完成只有属主能做的 attach + commit；
 2. 像素如何安全地跨进程搬运、同步。
 
-为什么 wine 的 X11 驱动从来没有这个问题：X11 的 drawable 是 server 全局的，任何 client 都能往里画。而 wayland 驱动下，GPU 进程无法操作别的窗口。
+为什么 wine 的 X11 驱动从来没有这个问题，因为 X11 的 drawable 是 server 全局的，任何 client 都能往里画，而且跨进程的窗口操作也是允许的。而在 wayland 驱动下，GPU 进程无法操作别的窗口。
 
-## 二、方案：控制权留在属主进程，内容走 fd，协调走 wineserver
+## 方案：控制权留在属主进程，内容走 fd，协调走 wineserver
 
 注意，这套跨进程渲染方案依赖于其它几个早期提交：
 
 - **2024-11**：`EmulateModeset` 注册表开关，引入 framebuffer surface 模式，让 GL 渲染进 FBO 而非窗口原生 surface；
-- **2025-10 ~ 12**：win32u 的 client surface 体系成型，且支持为"其他进程的窗口"创建 client surface；
+- **2025-10 ~ 12**：win32u 的 client surface 体系成型，且支持为其他进程的窗口创建 client surface；
 
 ### 架构总图
 
@@ -107,13 +109,13 @@ sequenceDiagram
 
 ### 为什么没有破坏 Wayland 安全模型
 
-站在合成器的视角，整个系统就是**一个普通 client（属主进程）在正常刷新自己的窗口**。GPU 进程从始至终没有对 compositor 说过一句话，没有任何 surface 权限。共享渠道是 `linux-dmabuf` 这个设计内的"正门"。跨进程协调不依赖合成器，而由 wineserver 补位 Windows 内核的角色。
+站在合成器的视角，整个系统就是一个普通 client（属主进程）在正常刷新自己的窗口。GPU 进程从始至终没有对 compositor 说过一句话，没有任何 surface 权限。共享渠道是 `linux-dmabuf` 这个设计内的"正门"。跨进程协调不依赖合成器，而由 wineserver 补位 X11 下的 X-Server的角色。
 
-## 三、如何开启（实测）
+## 如何开启（实测）
 
 **1. 版本要求**：upstream master 2026-11-17 之后（包含 MR !12506），预计在 wine 11.23 发布版本中将出现该新特性。
 
-**2. 打开 EmulateModeset**（远程 swapchain 目前只在显示模式模拟路径生效）：
+**2. 打开 EmulateModeset**：
 
 ```bash
 # 注意：即使使用 wayland 驱动，选项也放在 "X11 Driver" 节下（历史命名，win32u 全局读取）
@@ -124,33 +126,36 @@ wine reg add "HKCU\\Software\\Wine\\X11 Driver" /v EmulateModeset /t REG_SZ /d y
 
 **4. 实测记录**：wine master + winewayland 驱动 + cefclient 142（Chrome runtime），开启开关后页面渲染成功。用 `WINEDEBUG=+opengl,+d3dkmt` 可以看到整条链路的痕迹：`Created swapchain` / `Opened global ... swapchain`（属主进程创建、渲染进程打开）、`d3dkmt_swapchain_queue_present` / `release_image` 成对出现、keyed mutex acquire/release 有节奏地交替。
 
-## 四、优缺点与展望
+![](./images/wine_wayland_cef_01.png)
+
+## 四、优缺点
 
 **优点：**
 
 - **不破坏 Wayland 安全模型**：控制权留在属主进程，内容走 fd，合成器零感知、零改动；
 - **层次选得好**：实现在 win32u 公共层而非单个图形驱动里，wayland / X11(EGL) 通吃，所有走 GL 呈现的跨进程应用一次受益；
-- **语义对齐 Windows**：跨进程渲染在 Windows 上本就合法，wine 只是补齐了 Linux 侧的等价物；
 - **复用既有基础设施**：wineserver 对象、窗口消息、client surface，不引入新协议、不需要合成器配合。
 
 **局限：**
 
-- **仅覆盖 GL 路径**：wined3d GL 后端 / 桌面 GL 应用可用；DXGI/D3D 原生 swapchain、Vulkan 尚未接入；
-- **Chromium 的主路径还没修好**：Chromium 142 的首选输出是 DirectComposition 共享表面，而 wine 的 `dcomp` 目前是纯桩（`DCompositionCreateDevice2/3` 返回 `E_NOTIMPL`），CEF 走的是"回退到 swapchain"路径。补全 dcomp 才是长期正道；
+- **仅覆盖 GL 路径**：wined3d GL 后端 / 桌面 GL 应用可用，DXGI/D3D 原生 swapchain、Vulkan 尚未接入。此外如果 cefclient 加上 `--disable-gpu` 运行参数，强制使用软件渲染，也会白屏；
+- **Chromium 的主路径还没修好**：Chromium 142 的首选输出是 DirectComposition 共享表面，而 wine 的 `dcomp` 目前是纯桩（`DCompositionCreateDevice2/3` 返回 `E_NOTIMPL`），回退到 swapchain 路径。补全 dcomp 才是长期正道；
 - **性能开销**：FBO→共享纹理→属主 drawable 两次 GPU blit，且每帧一次跨进程消息，非零拷贝方案；
-- **依赖 Mesa 扩展**：NVIDIA 私有驱动暂不可用；
+- **依赖 Mesa 扩展**：NVIDIA 私有驱动可能会有问题；
 - **EmulateModeset 是全局开关**：会改变 `ChangeDisplaySettings` 与 gamma 的语义（全屏游戏靠它"假切换分辨率"），默认未开启；
 - **属主进程必须有消息泵**：present 靠 post 消息驱动，无消息循环的宿主进程拿不到画面。
 
-**展望**：d3dkmt 共享资源、keyed mutex、跨进程对象 open 这些地基已经铺好，后续大概率会看到 dxgi/wined3d 接入远程 swapchain（覆盖 D3D 路径），以及 wine `dcomp` 的逐步实现。
+实测了一些国内常用的应用，比如企业微信、阿里云盘、汽水音乐、Foxmail 等 CEF 应用，还是存在问题，所以说，仅仅指望本次提交一次性解决跨进程渲染问题，并不现实，后续还有很多优化工作。
 
 ## 结语
 
-这个 MR 最漂亮的地方在于它对"边界"的理解：**Wayland 收走的是窗口控制权，不是内容共享权**。控制权老老实实留给属主进程，内容用 Linux 图形栈的标准介质（dma-buf fd）搬运，协调交给早已存在的 wineserver。没有 hack 合成器，没有新协议，却在协议安全模型内完整复刻了 Chromium 在 Windows 上的真实架构。CEF 类应用在 wayland 下白屏的日子，终于开始进入倒计时了。
+这次上游的合并，是一次 wine wayland 适配的重要里程碑。d3dkmt 共享资源、keyed mutex、跨进程对象 open 这些地基已经铺好，后续大概率会看到 dxgi/wined3d 接入远程 swapchain（覆盖 D3D 路径），以及 wine `dcomp` 的逐步实现。越来越多的 CEF 类 Windows 应用将能运行在 wayland 下。
+
+这个方案最漂亮的地方在于它对边界的理解：**Wayland 收走的是窗口控制权，不是内容共享权**。控制权老老实实留给属主进程，内容用 Linux 图形栈的标准介质（dma-buf fd）搬运，协调交给早已存在的 wineserver。没有 hack 合成器，没有新协议，却在协议安全模型内完整复刻了 Chromium 在 Windows 上的真实架构。CEF 类应用在 wayland 下白屏的日子，终于开始进入倒计时了。
 
 ---
 
 *参考：*
 - *MR !12506: <https://gitlab.winehq.org/wine/wine/-/merge_requests/12506>*
 - *EmulateModeset 引入提交: wine `21623338ab8`（2024-11）*
-- *本文实测环境：wine master（2026-11-18）+ winewayland.drv + Mesa，CEF 142 cefclient*
+- *本文实测环境：wine master（2026-11-19）+ winewayland.drv + Mesa，CEF 142 cefclient*
