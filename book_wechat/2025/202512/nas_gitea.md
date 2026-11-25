@@ -1,3 +1,8 @@
+---
+title: 绿联 NAS（DH4300 Plus）上部署私有 Git 仓库
+cover: https://raw.githubusercontent.com/mogoweb/mywritings/master/book_wechat/2025/202512/images/nas_gitea_01.png
+---
+
 # 绿联 NAS（DH4300 Plus）上部署私有 Git 仓库
 
 在《[老登的新玩具：NAS](https://mp.weixin.qq.com/s/5kFWFXAn_c6eEFumQO4kRg)》一文中，我简单介绍了新购置的 NAS 设备。最初入手 NAS 的主要目的，其实很单纯——备份照片，同时作为家庭影视库使用。前段时间也确实“物尽其用”，补完了不少经典电影和美剧。
